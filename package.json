@@ -1,0 +1,64 @@
+{
+  "name": "angular-next",
+  "version": "1.1.0-rc.262",
+  "description": "",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack",
+    "coverage": "cross-env NODE_ENV=test nyc mocha",
+    "cucumber": "cross-env NIGHTWATCH_ENV=chrome cucumber-js tests/cucumber/features/**/*.feature --require @babel/register --require cucumber.conf.js --require tests/cucumber/step-definitions --format node_modules/cucumber-pretty --format json:.reports/cucumber/report.json",
+    "e2e": "nightwatch",
+    "format": "prettier --check {src,tests}/**",
+    "lint": "eslint {src,tests}/**/*.{html,js,json,jsx,ts,tsx,gql,graphql}",
+    "reinstall": "npm run remove && npm run update",
+    "remove": "rm -rf node_modules package-lock.json",
+    "serve": "cross-env NODE_ENV=development webpack serve --devtool=source-map",
+    "start": "npm run serve -- --open=chrome",
+    "test": "cross-env NODE_ENV=test mocha",
+    "update": "npm install && npm update"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "{src,tests}/**/*.{html,js,json,jsx,ts,tsx,gql,graphql}": [
+      "eslint"
+    ],
+    "{src,tests}/**": [
+      "prettier --check"
+    ]
+  },
+  "dependencies": {
+    "@angular/common": "next",
+    "@angular/compiler": "next",
+    "@angular/compiler-cli": "next",
+    "@angular/core": "next",
+    "@angular/forms": "next",
+    "@angular/platform-browser": "next",
+    "@angular/platform-browser-dynamic": "next",
+    "@leanup/form": "^1.1.0-rc.262",
+    "@leanup/lib": "^1.1.0-rc.262",
+    "copy-modules-webpack-plugin": "^2.2.0",
+    "core-js": "3.8.2",
+    "navigo": "7.1.3",
+    "rxjs": "6.6.3",
+    "tailwindcss": "2.0.2",
+    "zone.js": "0.11.3"
+  },
+  "devDependencies": {
+    "@leanup/cli": "^1.1.0-rc.262",
+    "@leanup/cli-angular": "^1.1.0-rc.262",
+    "@leanup/git-hooks": "^1.1.0-rc.262",
+    "@leanup/stack": "^1.1.0-rc.262",
+    "@leanup/stack-angular": "^1.1.0-rc.262",
+    "@ngtools/webpack": "next",
+    "chromedriver": "87.0.5",
+    "cssnano": "4.1.10",
+    "geckodriver": "1.21.1",
+    "npm-run-all": "^4.1.5",
+    "selenium-server": "3.141.59",
+    "typescript": "~4.1.3"
+  }
+}
