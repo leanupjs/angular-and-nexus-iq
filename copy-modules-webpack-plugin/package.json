@@ -1,0 +1,68 @@
+{
+  "_from": "copy-modules-webpack-plugin@2.2.0",
+  "_id": "copy-modules-webpack-plugin@2.2.0",
+  "_inBundle": false,
+  "_integrity": "sha512-Lu9ahoqwvxVo7yqLgiYY21oXS+/jkTXZcw0xFwX+YpOj8JFI49ffBW2ZiOaSv4ptH9x8tljKlE87zNcRUxUVFw==",
+  "_location": "/copy-modules-webpack-plugin",
+  "_phantomChildren": {
+    "graceful-fs": "4.2.4",
+    "jsonfile": "4.0.0",
+    "universalify": "0.1.2"
+  },
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "copy-modules-webpack-plugin@2.2.0",
+    "name": "copy-modules-webpack-plugin",
+    "escapedName": "copy-modules-webpack-plugin",
+    "rawSpec": "2.2.0",
+    "saveSpec": null,
+    "fetchSpec": "2.2.0"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npmjs.org/copy-modules-webpack-plugin/-/copy-modules-webpack-plugin-2.2.0.tgz",
+  "_shasum": "9488919b34c5dc80b63e5d77496bfbf8ef905c8a",
+  "_spec": "copy-modules-webpack-plugin@2.2.0",
+  "_where": "C:\\Users\\user\\Workspace\\leanup\\angular-next",
+  "author": {
+    "name": "Ross Pokorny"
+  },
+  "bugs": {
+    "url": "https://github.com/sonatype-nexus-community/copy-modules-webpack-plugin/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "fs-extra": "=8.1.0"
+  },
+  "deprecated": false,
+  "description": "A webpack plugin that copies the original sources of all bundled files to a specified directory so that they might be analyzed by separate tools",
+  "devDependencies": {
+    "jest": "25.1.0",
+    "node-dir": "=0.1.17",
+    "tmp": "0.1.0",
+    "webpack": "=4.41.5",
+    "webpack5": "npm:webpack@=5.10.1"
+  },
+  "files": [
+    "index.js"
+  ],
+  "homepage": "https://github.com/sonatype-nexus-community/copy-modules-webpack-plugin#readme",
+  "keywords": [
+    "webpack-plugin",
+    "sonatype",
+    "javascript"
+  ],
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "name": "copy-modules-webpack-plugin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sonatype-nexus-community/copy-modules-webpack-plugin.git"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "version": "2.2.0"
+}
