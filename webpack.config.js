@@ -1,8 +1,8 @@
 // module.exports = require('@leanup/stack-angular/webpack.config');
 
 module.exports = (...args) => {
-  const config = require('./webpack.config.angular')(...args);
-  //   const config = require('./webpack.config.react')(...args);
+  const config = require('@leanup/stack-angular/webpack.config')(...args);
+  //   const config = require('@leanup/stack-react/webpack.config')(...args);
 
   const CopyModulesWebpackPlugin = require('./copy-modules-webpack-plugin');
   config.plugins.shift(0, 1); // remove copy-modules-webpack-plugin
