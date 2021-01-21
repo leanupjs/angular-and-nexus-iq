@@ -21,19 +21,19 @@
             "index": "template.html",
             "main": "src/angular.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": true,
+            "aot": false,
             "assets": ["src/assets"]
           },
           "configurations": {
             "production": {
               "optimization": true,
               "outputHashing": "none",
-              "sourceMap": true,
+              "sourceMap": false,
               "extractCss": true,
-              "namedChunks": true,
+              "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": true,
+              "vendorChunk": false,
               "buildOptimizer": true
             }
           }
