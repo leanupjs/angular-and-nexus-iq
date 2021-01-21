@@ -41,52 +41,72 @@ module.exports = class WebpackCopyModulesPlugin {
 
   async handleEmit(webpackVersion, compilation) {
     const me = this,
-        fileDependencies = new Set(),
-        isWebpack5Plus = !!webpackVersion && webpackVersion.match(/^(\d+)\./)[1] >= 5;
+      fileDependencies = new Set(),
+      isWebpack5Plus = !!webpackVersion && webpackVersion.match(/^(\d+)\./)[1] >= 5;
 
     // add all fileDependencies that are actual files (parent directories are included in
     // compilation.fileDependencies)
     for (const fileDep of compilation.fileDependencies) {
-      if ((await fs.lstat(fileDep)).isFile()) {
-        fileDependencies.add(fileDep);
+      try {
+        if (fs.lstatSync(fileDep).isFile()) {
+          fileDependencies.add(fileDep);
+        }
+      } catch (e) {
+        const depDir = fileDep.replace(/[^\\/]+$/, '');
+        const depFile = fileDep.replace(/[^.]+$/, '');
+
+        let depDirFiles;
+        try {
+          depDirFiles = fs.readdirSync(path.resolve(depDir));
+        } catch (error) {
+          depDirFiles = [];
+        }
+
+        depDirFiles.forEach((depDirFile) => {
+          const depDirFilePath = path.resolve(depDir, depDirFile);
+          if (fs.lstatSync(depDirFilePath).isFile()) {
+            if (depFile === depDirFilePath.replace(/[^.]+$/, '')) {
+              fileDependencies.add(depDirFilePath);
+            }
+          }
+        });
       }
     }
 
     // Webpack 5 already includes the package.json files, so no need for this step there
-    const packageJsons = !isWebpack5Plus && this.includePackageJsons ?
-        this.findPackageJsonPaths(fileDependencies) : [];
+    const packageJsons = !isWebpack5Plus && this.includePackageJsons ? this.findPackageJsonPaths(fileDependencies) : [];
 
-    return Promise.all([...fileDependencies, ...packageJsons].map(function(file) {
-      const relativePath = replaceParentDirReferences(path.relative(process.cwd(), file)),
+    return Promise.all(
+      [...fileDependencies, ...packageJsons].map(function (file) {
+        const relativePath = replaceParentDirReferences(path.relative(process.cwd(), file)),
           destPath = path.join(me.destination, relativePath),
           destDir = path.dirname(destPath);
 
-      return fs.pathExists(file)
-          .then(exists => exists ?
-            fs.mkdirs(destDir).then(() => fs.copy(file, destPath, { overwrite: false })) :
-            Promise.resolve()
+        return fs
+          .pathExists(file)
+          .then((exists) =>
+            exists ? fs.mkdirs(destDir).then(() => fs.copy(file, destPath, { overwrite: false })) : Promise.resolve()
           );
-    }));
+      })
+    );
   }
 
   findPackageJsonPaths(filePaths) {
     const packageJsons = new Set(),
-
-        // dirs for which a package.json search has already been conducted.
-        // If the package.json search algo ends up in one of these dirs it knows it can stop searching
-        dirsAlreadySearchedForPackageJson = new Set();
+      // dirs for which a package.json search has already been conducted.
+      // If the package.json search algo ends up in one of these dirs it knows it can stop searching
+      dirsAlreadySearchedForPackageJson = new Set();
 
     // find associated package.json files for each fileDependency
-    filePaths.forEach(function(file) {
+    filePaths.forEach(function (file) {
       let dirPath = path.dirname(file),
-          oldDirPath;
+        oldDirPath;
 
       // until we reach the root
       while (dirPath !== oldDirPath) {
         if (dirsAlreadySearchedForPackageJson.has(dirPath)) {
           return;
-        }
-        else {
+        } else {
           dirsAlreadySearchedForPackageJson.add(dirPath);
 
           const packageJsonPath = path.join(dirPath, 'package.json');
@@ -94,8 +114,7 @@ module.exports = class WebpackCopyModulesPlugin {
           if (fs.pathExistsSync(packageJsonPath)) {
             packageJsons.add(packageJsonPath);
             return;
-          }
-          else {
+          } else {
             // loop again to check next parent dir
             oldDirPath = dirPath;
             dirPath = path.dirname(dirPath);
@@ -114,5 +133,5 @@ module.exports = class WebpackCopyModulesPlugin {
 function replaceParentDirReferences(inputPath) {
   const pathParts = inputPath.split(path.sep);
 
-  return pathParts.map(part => part === '..' ? '__..__' : part).join(path.sep);
+  return pathParts.map((part) => (part === '..' ? '__..__' : part)).join(path.sep);
 }
