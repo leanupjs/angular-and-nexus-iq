@@ -3,7 +3,7 @@
   "version": "1.1.0-rc.268",
   "description": "",
   "scripts": {
-    "build": "rm -rf .reports && cross-env NODE_ENV=production webpack",
+    "build": "npm run remove:nexus-iq && cross-env NODE_ENV=production webpack",
     "coverage": "cross-env NODE_ENV=test nyc mocha",
     "cucumber": "cross-env NIGHTWATCH_ENV=chrome cucumber-js tests/cucumber/features/**/*.feature --require @babel/register --require cucumber.conf.js --require tests/cucumber/step-definitions --format node_modules/cucumber-pretty --format json:.reports/cucumber/report.json",
     "e2e": "nightwatch",
@@ -11,8 +11,9 @@
     "lint": "eslint {src,tests}/**/*.{html,js,json,jsx,ts,tsx,gql,graphql}",
     "reinstall": "npm run remove && npm ci",
     "postinstall": "rm -rf node_modules/@leanup/stack-webpack/node_modules/copy-modules-webpack-plugin",
-    "remove": "rm -rf node_modules package-lock.json",
-    "serve": "rm -rf .reports && cross-env NODE_ENV=development webpack serve --devtool=source-map",
+    "remove": "rm -rf node_modules",
+    "remove:nexus-iq": "rm -rf .reports/nexus-iq",
+    "serve": "npm run remove:nexus-iq && cross-env NODE_ENV=development webpack serve --devtool=source-map",
     "start": "npm run serve -- --open=chrome",
     "test": "cross-env NODE_ENV=test mocha",
     "update": "ncu -t minor -u && npm install"
