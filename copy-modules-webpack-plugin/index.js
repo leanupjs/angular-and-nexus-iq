@@ -52,6 +52,8 @@ module.exports = class WebpackCopyModulesPlugin {
           fileDependencies.add(fileDep);
         }
       } catch (e) {
+        console.log(fileDep);
+
         const depDir = fileDep.replace(/[^\\/]+$/, '');
         const depFile = fileDep.replace(/[^.]+$/, '');
 

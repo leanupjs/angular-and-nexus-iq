@@ -30,6 +30,8 @@ The **`@leanup` ecosystem** stands for a lightweight and pure way for applicatio
 - [What makes the difference](#what-makes-the-difference)
 - [Principles](#principles)
 - [Reproduction / Angular + Nexus IQ](#reproduction--angular--nexus-iq)
+  - [Dependencies / Requirements](#dependencies--requirements)
+  - [Install](#install)
   - [Hack / Fix for copy-modules-webpack-plugin](#hack--fix-for-copy-modules-webpack-plugin)
   - [Webpack configuration](#webpack-configuration)
   - [Source main.ts toggle](#source-maints-toggle)
@@ -68,6 +70,15 @@ We use the minimal configuration and build no overhead stuff on top of the popul
 - keep the dependencies always up to date
 
 ## Reproduction / Angular + Nexus IQ
+
+### Dependencies / Requirements
+
+- `webpack@5.16.0` and
+- `copy-modules-webpack-plugin@2.2.0`
+
+### Install
+
+Use `npm ci` or `npm run reinstall`
 
 ### Hack / Fix for copy-modules-webpack-plugin
 
