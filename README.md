@@ -32,6 +32,7 @@ The **`@leanup` ecosystem** stands for a lightweight and pure way for applicatio
 - [Reproduction / Angular + Nexus IQ](#reproduction--angular--nexus-iq)
   - [Dependencies / Requirements](#dependencies--requirements)
   - [Install](#install)
+  - [Target reports](#target-reports)
   - [Hack / Fix for copy-modules-webpack-plugin](#hack--fix-for-copy-modules-webpack-plugin)
   - [Webpack configuration](#webpack-configuration)
   - [Source main.ts toggle](#source-maints-toggle)
@@ -79,6 +80,10 @@ We use the minimal configuration and build no overhead stuff on top of the popul
 ### Install
 
 Use `npm ci` or `npm run reinstall`
+
+### Target reports
+
+The expected reports are in the folder `./.expected/nexus-iq-angular` and `./.expected/nexus-iq-react`.
 
 ### Hack / Fix for copy-modules-webpack-plugin
 
