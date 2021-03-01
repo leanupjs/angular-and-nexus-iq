@@ -23,7 +23,8 @@
     "strict": true,
     "jsx": "react",
     "jsxFactory": "React.createElement",
-    "jsxFragmentFactory": "React.Fragment"
+    "jsxFragmentFactory": "React.Fragment",
+    "resolveJsonModule": true
   },
   "include": ["openapi/**/*", "src/**/*", "tests/**/*", "node_modules/@leanup/**/*"],
   "exclude": ["node_modules/@leanup/**/template/**/*"]
